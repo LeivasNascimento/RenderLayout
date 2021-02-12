@@ -10,15 +10,25 @@
 </head>
 <body>
     @*A div que estava aqui foi colocado em outro arquivo csthml*@ 
-    @RenderPage("~/Views/Shared/_Topo.cshtml");
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Meu Aplicativo ASP.NET</p>
-        </footer>
+    
+    <div class="container">
+        <div class="container body-content">
+            @RenderPage("~/Views/Shared/_Topo.cshtml")
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            @if (IsSectionDefined("rodape"))
+            {
+                @RenderSection("rodape");
+            }
+            else
+            {
+                @Html.Partial("_Rodape");
+            }
+            @*é igual ao RenderPage mas te possibilita trazer parâmetros*@ 
+        </div>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
